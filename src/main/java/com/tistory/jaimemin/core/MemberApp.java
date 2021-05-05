@@ -1,5 +1,6 @@
 package com.tistory.jaimemin.core;
 
+import com.tistory.jaimemin.core.config.AppConfig;
 import com.tistory.jaimemin.core.member.entity.Grade;
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.service.MemberService;
@@ -8,7 +9,10 @@ import com.tistory.jaimemin.core.member.service.MemberServiceImpl;
 public class MemberApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+
+        MemberService memberService = appConfig.memberService();
+        // MemberService memberService = new MemberServiceImpl();
 
         Member member = Member.builder()
                 .id(1L)

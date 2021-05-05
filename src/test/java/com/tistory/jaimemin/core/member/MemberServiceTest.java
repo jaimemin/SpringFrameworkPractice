@@ -1,15 +1,22 @@
 package com.tistory.jaimemin.core.member;
 
+import com.tistory.jaimemin.core.config.AppConfig;
 import com.tistory.jaimemin.core.member.entity.Grade;
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.service.MemberService;
 import com.tistory.jaimemin.core.member.service.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
+    MemberService memberService;
 
-    MemberService memberService = new MemberServiceImpl();
+    @BeforeEach
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join() {
