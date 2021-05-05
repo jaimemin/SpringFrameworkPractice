@@ -9,27 +9,35 @@ import com.tistory.jaimemin.core.member.service.MemberService;
 import com.tistory.jaimemin.core.member.service.MemberServiceImpl;
 import com.tistory.jaimemin.core.order.service.OrderService;
 import com.tistory.jaimemin.core.order.service.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /*
  * DIP 완성
  * 구성 영역과 사용 영역 분리
+ * ApplicationContext가 Bean들을 관리
  */
+@Configuration
 public class AppConfig {
 
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(getMemberRepository());
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(getMemberRepository()
                 , getDiscountPolicy());
     }
 
-    private MemoryMemberRepository getMemberRepository() {
+    @Bean
+    public MemoryMemberRepository getMemberRepository() {
         return new MemoryMemberRepository();
     }
 
-    private DiscountPolicy getDiscountPolicy() {
+    @Bean
+    public DiscountPolicy getDiscountPolicy() {
         return new RateDiscountPolicy();
     }
 }

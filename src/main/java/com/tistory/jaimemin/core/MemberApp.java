@@ -5,14 +5,16 @@ import com.tistory.jaimemin.core.member.entity.Grade;
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.service.MemberService;
 import com.tistory.jaimemin.core.member.service.MemberServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
-
-        MemberService memberService = appConfig.memberService();
-        // MemberService memberService = new MemberServiceImpl();
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService
+                = applicationContext.getBean("memberService", MemberService.class);
 
         Member member = Member.builder()
                 .id(1L)
