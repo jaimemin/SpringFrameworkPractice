@@ -42,4 +42,9 @@ public class OrderServiceImpl implements OrderService {
                 .discountPrice(discountPrice)
                 .build();
     }
+
+    // 싱글턴 적용이 되는지 테스트용
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
