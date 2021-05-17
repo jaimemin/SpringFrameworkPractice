@@ -2,17 +2,16 @@ package com.tistory.jaimemin.core.member.service;
 
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+@Component
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
-    /*
-    // SOLID 원칙 중 DIP 위반
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    */
-
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

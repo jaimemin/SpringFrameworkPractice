@@ -4,22 +4,19 @@ import com.tistory.jaimemin.core.discount.DiscountPolicy;
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.repository.MemberRepository;
 import com.tistory.jaimemin.core.order.entity.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
 
     private final DiscountPolicy discountPolicy;
 
-    /*
-     * SOLID 원칙 중 DIP와 OCP 룰을 위반한 코드
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
-    */
-
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository
             , DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;

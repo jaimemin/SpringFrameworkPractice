@@ -1,11 +1,13 @@
 package com.tistory.jaimemin.core.member.repository;
 
 import com.tistory.jaimemin.core.member.entity.Member;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     // 예제이기 때문에 HashMap
