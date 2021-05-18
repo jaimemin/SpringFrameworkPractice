@@ -1,9 +1,11 @@
 package com.tistory.jaimemin.core.order.service;
 
+import com.tistory.jaimemin.core.annotation.MainDiscountPolicy;
 import com.tistory.jaimemin.core.discount.DiscountPolicy;
 import com.tistory.jaimemin.core.member.entity.Member;
 import com.tistory.jaimemin.core.member.repository.MemberRepository;
 import com.tistory.jaimemin.core.order.entity.Order;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -18,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository
-            , DiscountPolicy discountPolicy) {
+            , @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
