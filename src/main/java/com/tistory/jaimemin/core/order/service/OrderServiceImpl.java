@@ -7,6 +7,7 @@ import com.tistory.jaimemin.core.member.repository.MemberRepository;
 import com.tistory.jaimemin.core.order.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
