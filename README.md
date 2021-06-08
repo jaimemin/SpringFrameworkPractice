@@ -15,6 +15,9 @@
 
 ### 내용 정리
 @ComponentScan 정리: https://jaimemin.tistory.com/1769
+
 @Autowired 정리: https://jaimemin.tistory.com/1772
+
 스프링 빈 생명주기 정리: https://jaimemin.tistory.com/1787
+
 빈 스코프 정리: https://jaimemin.tistory.com/1789
