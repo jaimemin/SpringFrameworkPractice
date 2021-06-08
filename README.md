@@ -12,3 +12,9 @@
 * 회원 등급에 따라 할인 정책을 적용할 수 있다.
 * 모든 VIP는 1000원을 할인해주는 고정 금액 할인을 적용 (이후 변경 가능) -> 정률형 10% 할인으로 변경
 * 할인 정책은 변경 가능성이 높다. 회사의 기본 할인 정책을 아직 정하지 못했고, 오픈 직전까지 고민을 미루고 싶다. 최악의 경우 할인을 적용하지 않을 수도 있다. (미확정)
+
+### 내용 정리
+@ComponentScan 정리: https://jaimemin.tistory.com/1769
+@Autowired 정리: https://jaimemin.tistory.com/1772
+스프링 빈 생명주기 정리: https://jaimemin.tistory.com/1787
+빈 스코프 정리: https://jaimemin.tistory.com/1789
