@@ -1,4 +1,4 @@
-# itemService
+# ItemService
 
 간단한 상품 등록 및 조회 어플리케이션
 ---
