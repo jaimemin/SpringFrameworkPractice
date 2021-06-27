@@ -1,5 +1,8 @@
 package com.tistory.jaimemin.itemservice.domain.item;
 
+import lombok.Getter;
+
+@Getter
 public enum ItemType {
 
     BOOK("도서"),
