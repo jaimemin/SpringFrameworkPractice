@@ -1,4 +1,4 @@
-package hello.itemservice.message;
+package com.tistory.jaimemin.itemservice.message;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package hello.itemservice.domain.item;
+package com.tistory.jaimemin.itemservice.domain.item;
 
 import lombok.Data;
 

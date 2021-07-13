@@ -1,5 +1,6 @@
-package hello.itemservice.domain.item;
+package com.tistory.jaimemin.itemservice.domain.item;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,7 @@ class ItemRepositoryTest {
 
         //then
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result).contains(item1, item2);
+        Assertions.assertThat(result).contains(item1, item2);
     }
 
     @Test

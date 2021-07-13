@@ -1,7 +1,7 @@
-package hello.itemservice;
+package com.tistory.jaimemin.itemservice;
 
-import hello.itemservice.domain.item.Item;
-import hello.itemservice.domain.item.ItemRepository;
+import com.tistory.jaimemin.itemservice.domain.item.Item;
+import com.tistory.jaimemin.itemservice.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
