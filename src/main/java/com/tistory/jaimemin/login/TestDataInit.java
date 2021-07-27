@@ -2,6 +2,8 @@ package com.tistory.jaimemin.login;
 
 import com.tistory.jaimemin.login.domain.item.Item;
 import com.tistory.jaimemin.login.domain.item.ItemRepository;
+import com.tistory.jaimemin.login.domain.member.Member;
+import com.tistory.jaimemin.login.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,8 @@ public class TestDataInit {
 
     private final ItemRepository itemRepository;
 
+    private final MemberRepository memberRepository;
+
     /**
      * 테스트용 데이터 추가
      */
@@ -20,6 +24,12 @@ public class TestDataInit {
     public void init() {
         itemRepository.save(new Item("itemA", 10000, 10));
         itemRepository.save(new Item("itemB", 20000, 20));
+
+        memberRepository.save(Member.builder()
+                .loginId("test")
+                .password("test!")
+                .name("테스터")
+                .build());
     }
 
 }
