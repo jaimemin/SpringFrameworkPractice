@@ -2,6 +2,7 @@ package com.tistory.jaimemin.login.web.login;
 
 import com.tistory.jaimemin.login.domain.login.LoginService;
 import com.tistory.jaimemin.login.domain.member.Member;
+import com.tistory.jaimemin.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.util.ObjectUtils;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
@@ -22,12 +24,14 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    private final SessionManager sessionManager;
+
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginForm";
     }
 
-    @PostMapping("/login")
+    // @PostMapping("/login")
     public String login(@Validated @ModelAttribute("loginForm") LoginForm form
             , BindingResult bindingResult
             , HttpServletResponse response) {
@@ -51,9 +55,40 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/login")
+    public String loginV2(@Validated @ModelAttribute("loginForm") LoginForm form
+            , BindingResult bindingResult
+            , HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            return "login/loginForm";
+        }
+
+        Member member = loginService.login(form.getLoginId(), form.getPassword());
+
+        if (member == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+
+            return "login/loginForm";
+        }
+
+        // 로그인 성공 처리
+
+        // 세션 관리자를 통해 세션을 생성하고 회원 데이터 보관
+        sessionManager.createSession(member, response);
+
+        return "redirect:/";
+    }
+
+    // @PostMapping("/logout")
     public String logout(HttpServletResponse response) {
         expireCookie(response, "memberId");
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logoutV2(HttpServletRequest request) {
+        sessionManager.expireCookie(request);
 
         return "redirect:/";
     }
