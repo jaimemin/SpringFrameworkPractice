@@ -2,6 +2,7 @@ package com.tistory.jaimemin.login.web.login;
 
 import com.tistory.jaimemin.login.domain.login.LoginService;
 import com.tistory.jaimemin.login.domain.member.Member;
+import com.tistory.jaimemin.login.web.SessionConstant;
 import com.tistory.jaimemin.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.thymeleaf.util.ObjectUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -55,7 +57,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/login")
+    // @PostMapping("/login")
     public String loginV2(@Validated @ModelAttribute("loginForm") LoginForm form
             , BindingResult bindingResult
             , HttpServletResponse response) {
@@ -79,6 +81,31 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @PostMapping("/login")
+    public String loginV3(@Validated @ModelAttribute("loginForm") LoginForm form
+            , BindingResult bindingResult
+            , HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
+            return "login/loginForm";
+        }
+
+        Member member = loginService.login(form.getLoginId(), form.getPassword());
+
+        if (member == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+
+            return "login/loginForm";
+        }
+
+        // 로그인 성공 처리
+        // 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
+        HttpSession session = request.getSession();
+        // 세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConstant.LOGIN_MEMBER, member);
+
+        return "redirect:/";
+    }
+
     // @PostMapping("/logout")
     public String logout(HttpServletResponse response) {
         expireCookie(response, "memberId");
@@ -86,9 +113,20 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/logout")
+    // @PostMapping("/logout")
     public String logoutV2(HttpServletRequest request) {
         sessionManager.expireCookie(request);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logoutV3(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+        }
 
         return "redirect:/";
     }
