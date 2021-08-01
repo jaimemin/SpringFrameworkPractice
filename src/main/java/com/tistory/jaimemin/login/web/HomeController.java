@@ -2,6 +2,7 @@ package com.tistory.jaimemin.login.web;
 
 import com.tistory.jaimemin.login.domain.member.Member;
 import com.tistory.jaimemin.login.domain.member.MemberRepository;
+import com.tistory.jaimemin.login.web.argumentresolver.Login;
 import com.tistory.jaimemin.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,8 +86,22 @@ public class HomeController {
         return "loginHome";
     }
 
-    @GetMapping("/")
+    // @GetMapping("/")
     public String homeLoginV3Spring(@SessionAttribute(name = SessionConstant.LOGIN_MEMBER, required = false) Member member
+            , Model model) {
+        // 세션에 회원 데이터가 없으면 home
+        if (member == null) {
+            return "home";
+        }
+
+        // 세션이 유지되면 로그인으로 이동
+        model.addAttribute("member", member);
+
+        return "loginHome";
+    }
+
+    @GetMapping("/")
+    public String homeLoginV3ArgumentResolver(@Login Member member
             , Model model) {
         // 세션에 회원 데이터가 없으면 home
         if (member == null) {
