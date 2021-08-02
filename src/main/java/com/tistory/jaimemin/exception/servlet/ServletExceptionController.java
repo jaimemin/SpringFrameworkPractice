@@ -23,6 +23,6 @@ public class ServletExceptionController {
 
     @GetMapping("/error-500")
     public void error500(HttpServletResponse response) throws IOException {
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "404 오류!");
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "500 오류!");
     }
 }
