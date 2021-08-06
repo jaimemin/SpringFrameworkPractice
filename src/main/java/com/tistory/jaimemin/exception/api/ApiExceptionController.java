@@ -1,5 +1,6 @@
 package com.tistory.jaimemin.exception.api;
 
+import com.tistory.jaimemin.exception.exception.UserException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,10 @@ public class ApiExceptionController {
     public MemberDto getmember(@PathVariable("id") String id) {
         if ("ex".equals(id)) {
             throw new RuntimeException("잘못된 사용자");
+        } else if ("bad".equals(id)) {
+            throw new IllegalArgumentException("잘못된 입력 값");
+        } else if ("user-ex".equals(id)) {
+            throw new UserException("사용자 오류");
         }
 
         return new MemberDto(id, "hello " + id);
