@@ -1,5 +1,6 @@
 package com.tistory.jaimemin.typeconverter.controller;
 
+import com.tistory.jaimemin.typeconverter.type.IpPort;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,14 @@ public class HelloController {
     @GetMapping("/hello-v2")
     public String helloV2(@RequestParam Integer data) {
         log.info("data = {}", data);
+
+        return "ok";
+    }
+
+    // Converter 동작 잘하는 것을 확인 가능
+    @GetMapping("/ip-port")
+    public String ipPort(@RequestParam IpPort ipPort) {
+        log.info("ipPort ip = {}, port = {}", ipPort.getIp(), ipPort.getPort());
 
         return "ok";
     }
