@@ -3,6 +3,8 @@ package com.tistory.jaimemin.typeconverter.converter;
 import com.tistory.jaimemin.typeconverter.type.IpPort;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConverterTest {
@@ -38,5 +40,21 @@ public class ConverterTest {
         IpPort ipPort = converter.convert("127.0.0.1:8080");
 
         assertThat(ipPort).isEqualTo(new IpPort("127.0.0.1", 8080));
+    }
+
+    @Test
+    void birthdayToString() {
+        BirthdayToStringConverter converter = new BirthdayToStringConverter();
+        String birthday = converter.convert(LocalDate.of(2021, 8, 11));
+
+        assertThat(birthday).isEqualTo("2021.08.11");
+    }
+
+    @Test
+    void stringToBirthday() {
+        StringToBirthdayConverter converter = new StringToBirthdayConverter();
+        LocalDate birthday = converter.convert("2021.08.11");
+
+        assertThat(birthday).isEqualTo(LocalDate.of(2021, 8, 11));
     }
 }
